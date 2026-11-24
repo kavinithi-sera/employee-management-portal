@@ -1,0 +1,183 @@
+<div class="login-page">
+
+  <mat-card class="login-card">
+
+    <mat-card-header>
+
+      <mat-card-title>
+        Employee Management Portal
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        Sign in to continue
+      </mat-card-subtitle>
+
+    </mat-card-header>
+
+
+    <mat-card-content>
+
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="login()"
+        class="login-form">
+
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Email</mat-label>
+
+          <mat-icon matPrefix>
+            email
+          </mat-icon>
+
+          <input
+            matInput
+            type="email"
+            formControlName="email">
+
+          @if (
+            loginForm.controls.email
+              .hasError('required') &&
+            loginForm.controls.email.touched
+          ) {
+
+            <mat-error>
+              Email is required.
+            </mat-error>
+
+          }
+
+          @if (
+            loginForm.controls.email
+              .hasError('email') &&
+            loginForm.controls.email.touched
+          ) {
+
+            <mat-error>
+              Enter a valid email.
+            </mat-error>
+
+          }
+
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+
+          <mat-label>Password</mat-label>
+
+          <mat-icon matPrefix>
+            lock
+          </mat-icon>
+
+          <input
+            matInput
+            [type]="
+              hidePassword()
+                ? 'password'
+                : 'text'
+            "
+            formControlName="password">
+
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="togglePassword()">
+
+            <mat-icon>
+
+              @if (hidePassword()) {
+                visibility
+              } @else {
+                visibility_off
+              }
+
+            </mat-icon>
+
+          </button>
+
+          @if (
+            loginForm.controls.password
+              .hasError('required') &&
+            loginForm.controls.password.touched
+          ) {
+
+            <mat-error>
+              Password is required.
+            </mat-error>
+
+          }
+
+          @if (
+            loginForm.controls.password
+              .hasError('minlength') &&
+            loginForm.controls.password.touched
+          ) {
+
+            <mat-error>
+              Password must contain at least
+              6 characters.
+            </mat-error>
+
+          }
+
+        </mat-form-field>
+
+
+        @if (errorMessage()) {
+
+          <p class="error-message">
+            {{ errorMessage() }}
+          </p>
+
+        }
+
+
+        <button
+          mat-flat-button
+          color="primary"
+          type="submit"
+          [disabled]="isLoading()">
+
+          @if (isLoading()) {
+
+            <mat-spinner
+              diameter="22">
+            </mat-spinner>
+
+            Signing in...
+
+          } @else {
+
+            Sign In
+
+          }
+
+        </button>
+
+
+        <div class="demo-credentials">
+
+          <strong>
+            Demo credentials
+          </strong>
+
+          <span>
+            Email: admin@ems.com
+          </span>
+
+          <span>
+            Password: Admin@123
+          </span>
+
+        </div>
+
+      </form>
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>

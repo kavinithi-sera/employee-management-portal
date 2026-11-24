@@ -1,0 +1,231 @@
+<h2 mat-dialog-title>
+
+  @if (isEditMode) {
+    Edit Employee
+  } @else {
+    Add Employee
+  }
+
+</h2>
+
+
+<mat-dialog-content>
+
+  <form
+    [formGroup]="employeeForm"
+    class="employee-form">
+
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Employee Code</mat-label>
+
+      <input
+        matInput
+        formControlName="employeeCode">
+
+      @if (
+        employeeForm.controls.employeeCode.invalid &&
+        employeeForm.controls.employeeCode.touched
+      ) {
+        <mat-error>
+          Employee code is required.
+        </mat-error>
+      }
+
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Name</mat-label>
+
+      <input
+        matInput
+        formControlName="name">
+
+      @if (
+        employeeForm.controls.name.hasError('required') &&
+        employeeForm.controls.name.touched
+      ) {
+        <mat-error>
+          Name is required.
+        </mat-error>
+      }
+
+      @if (
+        employeeForm.controls.name.hasError('minlength') &&
+        employeeForm.controls.name.touched
+      ) {
+        <mat-error>
+          Name must contain at least 3 characters.
+        </mat-error>
+      }
+
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Email</mat-label>
+
+      <input
+        matInput
+        formControlName="email">
+
+      @if (
+        employeeForm.controls.email.hasError('required') &&
+        employeeForm.controls.email.touched
+      ) {
+        <mat-error>
+          Email is required.
+        </mat-error>
+      }
+
+      @if (
+        employeeForm.controls.email.hasError('email') &&
+        employeeForm.controls.email.touched
+      ) {
+        <mat-error>
+          Enter a valid email.
+        </mat-error>
+      }
+
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Phone</mat-label>
+
+      <input
+        matInput
+        formControlName="phone">
+
+      @if (
+        employeeForm.controls.phone.invalid &&
+        employeeForm.controls.phone.touched
+      ) {
+        <mat-error>
+          Phone is required.
+        </mat-error>
+      }
+
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Department</mat-label>
+
+      <mat-select formControlName="departmentId">
+
+        @for (department of departments(); track department.id) {
+
+          <mat-option
+            [value]="department.id">
+
+            {{ department.name }}
+
+          </mat-option>
+
+        }
+
+      </mat-select>
+
+      @if (
+        employeeForm.controls.departmentId.invalid &&
+        employeeForm.controls.departmentId.touched
+      ) {
+        <mat-error>
+          Department is required.
+        </mat-error>
+      }
+
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Designation</mat-label>
+
+      <input
+        matInput
+        formControlName="designation">
+
+      @if (
+        employeeForm.controls.designation.invalid &&
+        employeeForm.controls.designation.touched
+      ) {
+        <mat-error>
+          Designation is required.
+        </mat-error>
+      }
+
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Salary</mat-label>
+
+      <input
+        matInput
+        type="number"
+        formControlName="salary">
+
+      @if (
+        employeeForm.controls.salary.invalid &&
+        employeeForm.controls.salary.touched
+      ) {
+        <mat-error>
+          Enter a valid salary.
+        </mat-error>
+      }
+
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+
+      <mat-label>Joining Date</mat-label>
+
+      <input
+        matInput
+        type="date"
+        formControlName="joiningDate">
+
+    </mat-form-field>
+
+
+    <mat-checkbox formControlName="active">
+      Active employee
+    </mat-checkbox>
+
+  </form>
+
+</mat-dialog-content>
+
+
+<mat-dialog-actions align="end">
+
+  <button
+    mat-button
+    (click)="onCancel()">
+    Cancel
+  </button>
+
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="onSubmit()">
+
+    @if (isEditMode) {
+      Update
+    } @else {
+      Save
+    }
+
+  </button>
+
+</mat-dialog-actions>

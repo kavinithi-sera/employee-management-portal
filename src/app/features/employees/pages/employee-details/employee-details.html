@@ -1,0 +1,100 @@
+<div class="details-container">
+
+  <button
+    mat-button
+    routerLink="/employees">
+
+    <mat-icon>arrow_back</mat-icon>
+
+    Back to Employees
+
+  </button>
+
+
+  @if (isLoading()) {
+
+    <p>Loading employee...</p>
+
+  } @else if (errorMessage()) {
+
+    <p class="error-message">
+      {{ errorMessage() }}
+    </p>
+
+  } @else if (employee(); as emp) {
+
+    <mat-card>
+
+      <mat-card-header>
+
+        <mat-card-title>
+          {{ emp.name }}
+        </mat-card-title>
+
+        <mat-card-subtitle>
+          {{ emp.employeeCode }}
+        </mat-card-subtitle>
+
+      </mat-card-header>
+
+
+      <mat-card-content>
+
+        <div class="details-grid">
+
+          <div>
+            <strong>Email</strong>
+            <p>{{ emp.email }}</p>
+          </div>
+
+          <div>
+            <strong>Phone</strong>
+            <p>{{ emp.phone }}</p>
+          </div>
+
+          <div>
+            <strong>Designation</strong>
+            <p>{{ emp.designation }}</p>
+          </div>
+
+          <div>
+            <strong>Department</strong>
+            @if (department(); as dept) {
+              <p>
+                {{ dept.name }}
+              </p>
+            } @else {
+              <p>-</p>
+            }
+          </div>
+
+          <div>
+            <strong>Salary</strong>
+            <p>{{ emp.salary }}</p>
+          </div>
+
+          <div>
+            <strong>Joining Date</strong>
+            <p>{{ emp.joiningDate }}</p>
+          </div>
+
+          <div>
+            <strong>Status</strong>
+
+            @if (emp.active) {
+              <p>Active</p>
+            } @else {
+              <p>Inactive</p>
+            }
+
+          </div>
+
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+  }
+
+</div>

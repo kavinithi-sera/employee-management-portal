@@ -1,0 +1,25 @@
+.details-container {
+  max-width: 900px;
+}
+
+mat-card {
+  margin-top: 20px;
+}
+
+mat-card-content {
+  padding-top: 20px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 32px;
+}
+
+.details-grid p {
+  margin-top: 4px;
+}
+
+.error-message {
+  color: #b3261e;
+}

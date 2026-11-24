@@ -1,0 +1,187 @@
+<div class="dashboard-header">
+
+  <div>
+    <h1>Dashboard</h1>
+
+    <p>
+      Employee Management Portal overview
+    </p>
+  </div>
+
+</div>
+
+
+@if (isLoading()) {
+
+  <p>
+    Loading dashboard...
+  </p>
+
+} @else if (errorMessage()) {
+
+  <p class="error-message">
+    {{ errorMessage() }}
+  </p>
+
+} @else {
+
+  <div class="dashboard-grid">
+
+
+    <mat-card>
+
+      <mat-card-content class="stat-card">
+
+        <mat-icon>
+          groups
+        </mat-icon>
+
+        <div>
+
+          <span class="stat-label">
+            Total Employees
+          </span>
+
+          <strong class="stat-value">
+            {{ totalEmployees() }}
+          </strong>
+
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+    <mat-card>
+
+      <mat-card-content class="stat-card">
+
+        <mat-icon>
+          business
+        </mat-icon>
+
+        <div>
+
+          <span class="stat-label">
+            Departments
+          </span>
+
+          <strong class="stat-value">
+            {{ totalDepartments() }}
+          </strong>
+
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+    <mat-card>
+
+      <mat-card-content class="stat-card">
+
+        <mat-icon>
+          check_circle
+        </mat-icon>
+
+        <div>
+
+          <span class="stat-label">
+            Active Employees
+          </span>
+
+          <strong class="stat-value">
+            {{ activeEmployees() }}
+          </strong>
+
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+
+    <mat-card>
+
+      <mat-card-content class="stat-card">
+
+        <mat-icon>
+          person_off
+        </mat-icon>
+
+        <div>
+
+          <span class="stat-label">
+            Inactive Employees
+          </span>
+
+          <strong class="stat-value">
+            {{ inactiveEmployees() }}
+          </strong>
+
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+    <mat-card class="payroll-card">
+
+      <mat-card-content class="stat-card">
+
+        <mat-icon>
+          payments
+        </mat-icon>
+
+        <div>
+
+          <span class="stat-label">
+            Monthly Payroll
+          </span>
+
+          <strong class="stat-value">
+
+            {{
+              totalPayroll()
+                | currency:'INR':'symbol':'1.0-0'
+            }}
+
+          </strong>
+
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+
+    <mat-card class="payroll-card">
+
+        <mat-card-content class="stat-card">
+
+            <mat-icon>
+                currency_rupee
+            </mat-icon>
+
+            <div>
+
+            <span class="stat-label">
+                Average Salary
+            </span>
+
+            <strong class="stat-value">
+                {{
+                averageSalary()
+                    | currency:'INR':'symbol':'1.0-0'
+                }}
+            </strong>
+
+            </div>
+
+        </mat-card-content>
+
+    </mat-card>
+
+
+  </div>
+
+}

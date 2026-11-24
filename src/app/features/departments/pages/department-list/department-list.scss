@@ -1,0 +1,19 @@
+.department-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-actions {
+  width: 120px;
+  white-space: nowrap;
+}
+
+.error-message {
+  color: #b3261e;
+}

@@ -1,0 +1,106 @@
+{
+  "employees": [
+    {
+      "id": "1",
+      "employeeCode": "EMP001",
+      "name": "Arun Kumar",
+      "email": "arun@company.com",
+      "phone": "9876543210",
+      "departmentId": "1",
+      "designation": "Software Engineer",
+      "salary": 65000,
+      "joiningDate": "2025-01-15",
+      "active": true
+    },
+    {
+      "id": "2",
+      "employeeCode": "EMP002",
+      "name": "Priya Sharma",
+      "email": "priya@company.com",
+      "phone": "9876543211",
+      "departmentId": "2",
+      "designation": "HR Executive",
+      "salary": 50000,
+      "joiningDate": "2024-08-10",
+      "active": true
+    },
+    {
+      "id": "3",
+      "employeeCode": "EMP003",
+      "name": "Rahul Verma",
+      "email": "rahul@company.com",
+      "phone": "9876543212",
+      "departmentId": "1",
+      "designation": "Lead Developer",
+      "salary": 85000,
+      "joiningDate": "2023-03-20",
+      "active": true
+    },
+    {
+      "id": "4",
+      "employeeCode": "EMP004",
+      "name": "Sneha Rao",
+      "email": "sneha@company.com",
+      "phone": "9876543213",
+      "departmentId": "3",
+      "designation": "Business Analyst",
+      "salary": 70000,
+      "joiningDate": "2024-02-05",
+      "active": false
+    },
+    {
+      "id": "5",
+      "employeeCode": "EMP005",
+      "name": "Vikram Singh",
+      "email": "vikram@company.com",
+      "phone": "9876543214",
+      "departmentId": "1",
+      "designation": "QA Engineer",
+      "salary": 60000,
+      "joiningDate": "2025-06-12",
+      "active": true
+    },
+    {
+      "id": "WVY3EK7cZtU",
+      "employeeCode": "EMP006",
+      "name": "Anita Sharma",
+      "email": "anita@company.com",
+      "phone": "9876543215",
+      "departmentId": "1",
+      "designation": "Frontend Developer",
+      "salary": 72000,
+      "joiningDate": "2026-11-23",
+      "active": true
+    },
+    {
+      "id": "ugBOIDwxiv4",
+      "employeeCode": "EMP007",
+      "name": "Omar Raj",
+      "email": "omar@company.com",
+      "phone": "9087654321",
+      "departmentId": "3",
+      "designation": "Sales Rep",
+      "salary": 100000,
+      "joiningDate": "2021-11-21",
+      "active": false
+    }
+  ],
+  "departments": [
+    {
+      "id": "1",
+      "name": "Engineering",
+      "location": "Bangalore"
+    },
+    {
+      "id": "2",
+      "name": "Human Resources",
+      "location": "Bangalore"
+    },
+    {
+      "id": "3",
+      "name": "Business",
+      "location": "Hyderabad"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
