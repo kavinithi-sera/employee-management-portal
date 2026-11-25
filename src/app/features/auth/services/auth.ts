@@ -25,6 +25,14 @@ export class AuthService {
     () => this.token() !== null
   );
 
+  displayName = computed(() => {
+    const name = this.userName().trim();
+    if (!name) {
+      return '';
+    }
+    return name.split(' ')[0];
+  });
+
   login(
     credentials: LoginRequest
   ): Observable<AuthResponse> {
