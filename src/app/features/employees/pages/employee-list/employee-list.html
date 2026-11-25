@@ -18,13 +18,19 @@
 
 @if (isLoading()) {
 
-  <p>Loading employees...</p>
+  <app-loading-state />
 
 } @else if (errorMessage()) {
 
-  <p class="error-message">
-    {{ errorMessage() }}
-  </p>
+  <app-error-state
+    [message]="errorMessage()" />
+
+
+} @else if (employees().length === 0) {
+
+  <app-empty-state
+    message="No employees found."
+    icon="groups" />
 
 } @else {
 

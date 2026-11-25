@@ -13,6 +13,10 @@ import { DepartmentFormDialog } from '../../components/department-form-dialog/de
 
 import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 
+import { LoadingState } from '../../../../shared/components/loading-state/loading-state';
+import { ErrorState } from '../../../../shared/components/error-state/error-state';
+import { EmptyState } from '../../../../shared/components/empty-state/empty-state';
+
 @Component({
   selector: 'app-department-list',
   imports: [
@@ -20,7 +24,10 @@ import { ConfirmDialog } from '../../../../shared/components/confirm-dialog/conf
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    LoadingState,
+    ErrorState,
+    EmptyState
   ],
   templateUrl: './department-list.html',
   styleUrl: './department-list.scss'

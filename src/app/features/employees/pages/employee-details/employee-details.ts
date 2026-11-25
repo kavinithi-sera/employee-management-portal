@@ -11,13 +11,18 @@ import { EmployeeService } from '../../services/employee';
 import { Department } from '../../../departments/models/department.model';
 import { DepartmentService } from '../../../departments/services/department';
 
+import { LoadingState } from '../../../../shared/components/loading-state/loading-state';
+import { ErrorState } from '../../../../shared/components/error-state/error-state';
+
 @Component({
   selector: 'app-employee-details',
   imports: [
     RouterLink,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    LoadingState,
+    ErrorState
   ],
   templateUrl: './employee-details.html',
   styleUrl: './employee-details.scss'

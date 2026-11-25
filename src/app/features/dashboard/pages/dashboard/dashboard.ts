@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  computed,
-  signal
-} from '@angular/core';
+import { Component, OnInit, computed, signal } from '@angular/core';
 
 import { CurrencyPipe } from '@angular/common';
 
@@ -16,12 +11,17 @@ import { EmployeeService } from '../../../employees/services/employee';
 import { Department } from '../../../departments/models/department.model';
 import { DepartmentService } from '../../../departments/services/department';
 
+import { LoadingState } from '../../../../shared/components/loading-state/loading-state';
+import { ErrorState } from '../../../../shared/components/error-state/error-state';
+
 @Component({
   selector: 'app-dashboard',
   imports: [
     MatCardModule,
     MatIconModule,
-    CurrencyPipe
+    CurrencyPipe,
+    LoadingState,
+    ErrorState
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'

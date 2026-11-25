@@ -18,13 +18,18 @@
 
 @if (isLoading()) {
 
-  <p>Loading departments...</p>
+  <app-loading-state />
 
 } @else if (errorMessage()) {
 
-  <p class="error-message">
-    {{ errorMessage() }}
-  </p>
+  <app-error-state
+    [message]="errorMessage()" />
+
+} @else if (departments().length === 0) {
+
+  <app-empty-state
+    message="No departments found."
+    icon="business" />
 
 } @else {
 

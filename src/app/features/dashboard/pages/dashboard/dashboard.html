@@ -13,15 +13,12 @@
 
 @if (isLoading()) {
 
-  <p>
-    Loading dashboard...
-  </p>
+  <app-loading-state />
 
 } @else if (errorMessage()) {
 
-  <p class="error-message">
-    {{ errorMessage() }}
-  </p>
+  <app-error-state
+    [message]="errorMessage()" />
 
 } @else {
 
