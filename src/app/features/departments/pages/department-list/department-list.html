@@ -129,9 +129,22 @@
           mat-icon-button
           color="warn"
           aria-label="Delete department"
+          [disabled]="departmentBeingChecked() === department.id"
           (click)="deleteDepartment(department)">
 
-          <mat-icon>delete</mat-icon>
+          @if (departmentBeingChecked() === department.id) {
+
+            <mat-icon>
+              hourglass_empty
+            </mat-icon>
+
+          } @else {
+
+            <mat-icon>
+              delete
+            </mat-icon>
+
+          }
 
         </button>
 

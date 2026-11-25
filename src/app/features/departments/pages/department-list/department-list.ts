@@ -17,6 +17,8 @@ import { LoadingState } from '../../../../shared/components/loading-state/loadin
 import { ErrorState } from '../../../../shared/components/error-state/error-state';
 import { EmptyState } from '../../../../shared/components/empty-state/empty-state';
 
+import { EmployeeService } from '../../../employees/services/employee';
+
 @Component({
   selector: 'app-department-list',
   imports: [
@@ -49,9 +51,12 @@ export class DepartmentList implements OnInit {
 
   constructor(
     private departmentService: DepartmentService,
+    private employeeService: EmployeeService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
+
+
 
   ngOnInit(): void {
     this.loadDepartments();
@@ -159,9 +164,68 @@ export class DepartmentList implements OnInit {
 
   }
 
-  deleteDepartment(
-    department: Department
-  ): void {
+  departmentBeingChecked = signal<string | null>(null);
+
+  deleteDepartment(department: Department): void {
+
+    this.departmentBeingChecked.set(department.id);
+
+    this.employeeService
+      .getEmployeesByDepartmentId(
+        department.id
+      )
+      .subscribe({
+
+        next: (employees) => {
+
+          this.departmentBeingChecked.set(
+            null
+          );
+
+          if (employees.length > 0) {
+
+            this.snackBar.open(
+              `${department.name} cannot be deleted because ${employees.length} employee(s) are assigned to it.`,
+              'Close',
+              {
+                duration: 5000
+              }
+            );
+
+            return;
+          }
+
+          this.openDeleteConfirmation(
+            department
+          );
+        },
+
+        error: (error) => {
+
+          this.departmentBeingChecked.set(
+            null
+          );
+
+          console.error(
+            'Failed to check department employees:',
+            error
+          );
+
+          this.snackBar.open(
+            'Unable to verify whether this department can be deleted.',
+            'Close',
+            {
+              duration: 4000
+            }
+          );
+
+        }
+
+      });
+
+  }
+
+  private openDeleteConfirmation(department: Department): void {
 
     const dialogRef =
       this.dialog.open(
@@ -188,43 +252,54 @@ export class DepartmentList implements OnInit {
           return;
         }
 
-        this.departmentService
-          .deleteDepartment(department.id)
-          .subscribe({
-
-            next: () => {
-
-              this.snackBar.open(
-                'Department deleted successfully.',
-                'Close',
-                {
-                  duration: 3000
-                }
-              );
-
-              this.loadDepartments();
-            },
-
-            error: (error) => {
-
-              console.error(
-                'Failed to delete department:',
-                error
-              );
-
-              this.snackBar.open(
-                'Unable to delete department.',
-                'Close',
-                {
-                  duration: 3000
-                }
-              );
-
-            }
-
-          });
+        this.performDepartmentDeletion(
+          department
+        );
 
       });
 
   }
+
+  private performDepartmentDeletion(department: Department): void {
+
+    this.departmentService
+      .deleteDepartment(
+        department.id
+      )
+      .subscribe({
+
+        next: () => {
+
+          this.snackBar.open(
+            'Department deleted successfully.',
+            'Close',
+            {
+              duration: 3000
+            }
+          );
+
+          this.loadDepartments();
+        },
+
+        error: (error) => {
+
+          console.error(
+            'Failed to delete department:',
+            error
+          );
+
+          this.snackBar.open(
+            'Unable to delete department.',
+            'Close',
+            {
+              duration: 3000
+            }
+          );
+
+        }
+
+      });
+
+  }
+
 }

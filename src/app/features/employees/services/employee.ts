@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 import { Employee } from '../models/employee.model';
 
@@ -38,5 +38,15 @@ export class EmployeeService {
   deleteEmployee(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  getEmployeesByDepartmentId( departmentId: string ): Observable<Employee[]> {
+      return this.getEmployees().pipe(
+        map(employees =>
+          employees.filter(
+            employee => employee.departmentId === departmentId
+          )
+        )
+      );
+    }
 
 }
