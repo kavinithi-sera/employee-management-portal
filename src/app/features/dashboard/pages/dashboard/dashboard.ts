@@ -14,6 +14,8 @@ import { DepartmentService } from '../../../departments/services/department';
 import { LoadingState } from '../../../../shared/components/loading-state/loading-state';
 import { ErrorState } from '../../../../shared/components/error-state/error-state';
 
+import { finalize, forkJoin } from 'rxjs';
+
 @Component({
   selector: 'app-dashboard',
   imports: [
@@ -105,44 +107,39 @@ export class Dashboard implements OnInit {
     this.isLoading.set(true);
     this.errorMessage.set('');
 
-    this.employeeService
-      .getEmployees()
+    forkJoin({
+
+      employees:
+        this.employeeService.getEmployees(),
+
+      departments:
+        this.departmentService.getDepartments()
+
+    })
+      .pipe(
+
+        finalize(() => {
+          this.isLoading.set(false);
+        })
+
+      )
       .subscribe({
 
-        next: (employees) => {
+        next: ({
+          employees,
+          departments
+        }) => {
+
           this.employees.set(employees);
-          this.finishLoading();
-        },
 
-        error: (error) => {
-
-          console.error(
-            'Failed to load employees:',
-            error
-          );
-
-          this.errorMessage.set(
-            'Unable to load dashboard data.'
-          );
-
-          this.isLoading.set(false);
-        }
-
-      });
-
-
-    this.departmentService
-      .getDepartments()
-      .subscribe({
-
-        next: (departments) => {
           this.departments.set(departments);
+
         },
 
         error: (error) => {
 
           console.error(
-            'Failed to load departments:',
+            'Failed to load dashboard data:',
             error
           );
 
@@ -150,16 +147,10 @@ export class Dashboard implements OnInit {
             'Unable to load dashboard data.'
           );
 
-          this.isLoading.set(false);
         }
 
       });
 
-  }
-
-
-  private finishLoading(): void {
-    this.isLoading.set(false);
   }
 
 }

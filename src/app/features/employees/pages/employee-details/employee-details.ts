@@ -14,6 +14,8 @@ import { DepartmentService } from '../../../departments/services/department';
 import { LoadingState } from '../../../../shared/components/loading-state/loading-state';
 import { ErrorState } from '../../../../shared/components/error-state/error-state';
 
+import { finalize } from 'rxjs';
+
 @Component({
   selector: 'app-employee-details',
   imports: [
@@ -61,29 +63,42 @@ export class EmployeeDetails implements OnInit {
 
     this.employeeService
       .getEmployeeById(id)
+      .pipe(
+
+        finalize(() => {
+          this.isLoading.set(false);
+        })
+
+      )
       .subscribe({
 
         next: (employee) => {
+
           this.employee.set(employee);
-          this.loadDepartment(employee.departmentId);
-          this.isLoading.set(false);
+
+          this.loadDepartment(
+            employee.departmentId
+          );
+
         },
 
         error: (error) => {
+
           console.error(
             'Failed to load employee:',
             error
           );
 
           this.employee.set(null);
+
           this.errorMessage.set(
             'Unable to load employee details.'
           );
 
-          this.isLoading.set(false);
         }
 
       });
+
   }
 
   loadDepartment(departmentId: string): void {

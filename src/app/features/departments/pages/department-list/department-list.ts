@@ -19,6 +19,8 @@ import { EmptyState } from '../../../../shared/components/empty-state/empty-stat
 
 import { EmployeeService } from '../../../employees/services/employee';
 
+import { finalize } from 'rxjs';
+
 @Component({
   selector: 'app-department-list',
   imports: [
@@ -69,27 +71,29 @@ export class DepartmentList implements OnInit {
 
     this.departmentService
       .getDepartments()
+      .pipe(
+
+        finalize(() => {
+          this.isLoading.set(false);
+        })
+
+      )
       .subscribe({
 
         next: (departments) => {
-          this.departments.set(departments);
-          this.isLoading.set(false);
+
+          this.departments.set( departments);
+
         },
 
         error: (error) => {
 
-          console.error(
-            'Failed to load departments:',
-            error
-          );
+          console.error( 'Failed to load departments:', error );
 
           this.departments.set([]);
 
-          this.errorMessage.set(
-            'Unable to load departments.'
-          );
+          this.errorMessage.set( 'Unable to load departments.');
 
-          this.isLoading.set(false);
         }
 
       });

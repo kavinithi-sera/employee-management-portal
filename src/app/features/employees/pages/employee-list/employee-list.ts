@@ -30,6 +30,8 @@ import { LoadingState } from '../../../../shared/components/loading-state/loadin
 import { ErrorState } from '../../../../shared/components/error-state/error-state';
 import { EmptyState } from '../../../../shared/components/empty-state/empty-state';
 
+import { finalize } from 'rxjs';
+
 @Component({
   selector: 'app-employee-list',
   imports: [
@@ -97,27 +99,35 @@ export class EmployeeList implements OnInit {
     this.isLoading.set(true);
     this.errorMessage.set('');
 
-    this.employeeService.getEmployees().subscribe({
+    this.employeeService.getEmployees()
+      .pipe(
 
-      next: (employees) => {
-        console.log('Employees received:', employees);
+        finalize(() => {
+          this.isLoading.set(false);
+        })
 
-        this.employees.set(employees);
+      )
+      .subscribe({
 
-        this.dataSource.data = employees;
+        next: (employees) => {
+          console.log('Employees received:', employees);
 
-        this.isLoading.set(false);
-      },
+          this.employees.set(employees);
 
-      error: (error) => {
-        console.error('Component received error:', error);
+          this.dataSource.data = employees;
+        },
 
-        this.employees.set([]);
-        this.errorMessage.set('Unable to load employees.');
-        this.isLoading.set(false);
-      }
+        error: (error) => {
+          console.error('Failed to load employees:', error);
 
-    });
+          this.employees.set([]);
+
+          this.dataSource.data = [];
+
+          this.errorMessage.set('Unable to load employees.');
+        }
+
+      });
   }
 
   applyFilter(event: Event): void {
