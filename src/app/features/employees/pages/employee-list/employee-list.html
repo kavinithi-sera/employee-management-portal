@@ -34,20 +34,42 @@
 
 } @else {
 
-    <mat-form-field appearance="outline">
 
-        <mat-label>Search employees</mat-label>
+    <div class="search-container">
+        <mat-form-field appearance="outline" class="search-field">
 
-        <input
-            #searchInput
-            matInput
-            placeholder="Name, code, email..."
-            (input)="applyFilter($event)">
+            <mat-label>Search employees</mat-label>
 
-    </mat-form-field>
+            <mat-icon matPrefix>
+                search
+            </mat-icon>
 
-    <button mat-button (click) = "clearFilter(searchInput)">Clear</button>
+            <input
+                #searchInput
+                matInput
+                placeholder="Name, code, email..."
+                (input)="applyFilter($event)">
 
+            @if (searchInput.value) {
+
+                <button
+                    mat-icon-button
+                    matSuffix
+                    type="button"
+                    aria-label="Clear search"
+                    (click)="clearFilter(searchInput)">
+
+                    <mat-icon> close </mat-icon>
+
+                </button>
+
+            }
+
+        </mat-form-field>
+
+    </div>
+
+    <div class="table-container">
     <table
         mat-table
         [dataSource]="dataSource"
@@ -147,7 +169,10 @@
             mat-cell
             *matCellDef="let employee">
 
-            {{ employee.salary }}
+            {{
+                employee.salary
+                    | currency:'INR':'symbol':'1.0-0'
+            }}
 
         </td>
 
@@ -169,9 +194,13 @@
             *matCellDef="let employee">
 
             @if (employee.active) {
-                Active
+                <mat-chip class="status-chip status-active">
+                    Active
+                </mat-chip>
             } @else {
-                Inactive
+                <mat-chip class="status-chip status-inactive">
+                    Inactive
+                </mat-chip>
             }
 
         </td>
@@ -238,6 +267,7 @@
         </tr>
 
     </table>
+    </div>
 
     <mat-paginator
         [pageSize]="2"

@@ -32,6 +32,9 @@ import { EmptyState } from '../../../../shared/components/empty-state/empty-stat
 
 import { finalize } from 'rxjs';
 
+import { CurrencyPipe } from '@angular/common';
+import { MatChipsModule } from '@angular/material/chips';
+
 @Component({
   selector: 'app-employee-list',
   imports: [
@@ -47,7 +50,9 @@ import { finalize } from 'rxjs';
     MatSnackBarModule,
     LoadingState,
     ErrorState,
-    EmptyState
+    EmptyState,
+    CurrencyPipe,
+    MatChipsModule
   ],
   templateUrl: './employee-list.html',
   styleUrl: './employee-list.scss'
@@ -164,6 +169,7 @@ export class EmployeeList implements OnInit {
       this.dialog.open(EmployeeFormDialog, {
 
         width: '700px',
+        maxWidth: '95vw',
         data: employee
 
       });
@@ -194,6 +200,7 @@ export class EmployeeList implements OnInit {
     const dialogRef =
       this.dialog.open(EmployeeFormDialog, {
         width: '700px',
+        maxWidth: '95vw',
         data: null
       });
 

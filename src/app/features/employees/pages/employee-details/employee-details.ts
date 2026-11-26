@@ -16,6 +16,10 @@ import { ErrorState } from '../../../../shared/components/error-state/error-stat
 
 import { finalize } from 'rxjs';
 
+import { CurrencyPipe, DatePipe } from '@angular/common';
+
+import { MatChipsModule } from '@angular/material/chips';
+
 @Component({
   selector: 'app-employee-details',
   imports: [
@@ -24,7 +28,10 @@ import { finalize } from 'rxjs';
     MatButtonModule,
     MatIconModule,
     LoadingState,
-    ErrorState
+    ErrorState,
+    CurrencyPipe,
+    DatePipe,
+    MatChipsModule
   ],
   templateUrl: './employee-details.html',
   styleUrl: './employee-details.scss'

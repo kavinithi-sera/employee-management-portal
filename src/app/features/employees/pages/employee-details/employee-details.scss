@@ -12,8 +12,19 @@ mat-card-content {
 
 .details-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
   gap: 16px 32px;
+}
+
+@media (max-width: 650px) {
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
 }
 
 .details-grid p {
@@ -23,3 +34,18 @@ mat-card-content {
 .error-message {
   color: #b3261e;
 }
+
+.status-chip {
+  font-weight: 600;
+}
+
+.status-active {
+  background-color: #dff5e5 !important;
+  color: #137333 !important;
+}
+
+.status-inactive {
+  background-color: #fde7e5 !important;
+  color: #b3261e !important;
+}
+

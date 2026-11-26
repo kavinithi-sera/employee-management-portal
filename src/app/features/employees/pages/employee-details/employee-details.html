@@ -69,22 +69,38 @@
 
           <div>
             <strong>Salary</strong>
-            <p>{{ emp.salary }}</p>
+            <p>
+              {{
+                emp.salary
+                  | currency:'INR':'symbol':'1.0-0'
+              }}
+            </p>
           </div>
 
           <div>
             <strong>Joining Date</strong>
-            <p>{{ emp.joiningDate }}</p>
+            <p>
+              {{
+                emp.joiningDate
+                  | date:'dd MMM yyyy'
+              }}
+            </p>
           </div>
 
           <div>
             <strong>Status</strong>
 
-            @if (emp.active) {
-              <p>Active</p>
-            } @else {
-              <p>Inactive</p>
-            }
+              <p>
+              @if (emp.active) {
+                <mat-chip class="status-chip status-active">
+                  Active
+                </mat-chip>
+              } @else {
+                <mat-chip class="status-chip status-inactive">
+                  Inactive
+                </mat-chip>
+              }
+              </p>
 
           </div>
 

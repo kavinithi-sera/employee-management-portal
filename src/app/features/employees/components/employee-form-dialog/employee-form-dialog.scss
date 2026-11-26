@@ -1,11 +1,26 @@
 .employee-form {
   display: grid;
-  grid-template-columns: repeat(2, minmax(220px, 1fr));
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
   gap: 16px;
 
   padding-top: 8px;
 }
 
+mat-form-field {
+  width: 100%;
+}
+
 mat-checkbox {
   margin-top: 8px;
+}
+
+@media (max-width: 650px) {
+
+  .employee-form {
+    grid-template-columns: 1fr;
+  }
+
 }

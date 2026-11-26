@@ -2,11 +2,23 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  gap: 16px;
+
   margin-bottom: 16px;
 }
 
-table {
-  width: 100%;
+@media (max-width: 600px) {
+
+  .department-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .department-header button {
+    width: 100%;
+  }
+
 }
 
 .mat-column-actions {
@@ -16,4 +28,14 @@ table {
 
 .error-message {
   color: #b3261e;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 600px;
 }

@@ -107,6 +107,7 @@ export class DepartmentList implements OnInit {
         DepartmentFormDialog,
         {
           width: '500px',
+          maxWidth: '95vw',
           data: null
         }
       );
@@ -142,6 +143,7 @@ export class DepartmentList implements OnInit {
         DepartmentFormDialog,
         {
           width: '500px',
+          maxWidth: '95vw',
           data: department
         }
       );
